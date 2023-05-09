@@ -1,0 +1,69 @@
+{% include 'header.html' %}
+
+
+<script>
+    function checkpassword(){
+        var password = document.getElementById("pwd").value;
+        var confirmPassword = document.getElementById("cpwd").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<div class="card">
+    <div class="card bg-primary">
+        <div class="container">
+            <h2 >
+                Create an account
+            </h2>
+            <form name="signup" method="POST" onsubmit="return checkpassword()">
+              {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Enter Employee Name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter Employee name" name="name" pattern="[A-Za-z]+">
+                  </div>
+                  <div class="form-group">
+                    <label for="empcode">Enter Employee Code:</label>
+                    <input type="text" class="form-control" id="empcode" placeholder="Enter Employee codeName" name="empcode" pattern="[0-9]+">
+                  </div>
+                 
+                
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" pattern="[0-9]+">
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" class="form-control" id="cpwd" placeholder="Confirm Your password" name="cpwd" pattern="[0-9]+">
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" name="remember"> Remember me</label>
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+          </div>
+    
+    </div>
+</div>
+
+{% if error =="no" %}
+<script>
+    alert("Employee Registered Successfully");
+    window.location.href = "{% url 'login' %}";
+</script>
+{% endif %}
+{% if error =="yes" %}
+<script>
+    alert("Employee Registration Failed");
+    window.location.href = "{% url 'registration' %}";
+</script>
+{% endif %}
+
+<!-- {% include 'footer.html' %} -->

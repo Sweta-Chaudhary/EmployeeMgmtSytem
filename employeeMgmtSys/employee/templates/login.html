@@ -1,0 +1,46 @@
+{% include 'header.html' %}
+
+<div class="card">
+    <div class="card bg-primary">
+        <div class="container">
+            <h2 >
+                Create an account
+            </h2>
+            <form name="login" method="POST" >
+              {% csrf_token %}
+               
+                 
+                
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" pattern="[0-9]+">
+              </div>
+             
+         
+              <button type="submit" class="btn btn-default">login</button>
+            </form>
+          </div>
+    </div>
+</div>
+
+{% if error =="no" %}
+<script>
+    alert("Logged in Successfully");
+    window.location.href = "{% url 'login_home' %}";
+</script>
+{% endif %}
+
+{% if error =="yes" %}
+<script>
+    alert("Invalid Credentials");
+    
+</script>
+{% endif %}
+
+<!-- {% include 'footer.html' %} -->
+
+
