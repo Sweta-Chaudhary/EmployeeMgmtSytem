@@ -1,7 +1,8 @@
 
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from employee.models import *
+from .models import *
+from django.contrib.auth import authenticate, login, logout
 
 
 
@@ -28,6 +29,20 @@ def registration(request):
         return render(request, 'registration.html',locals())
 
 def login(request):
+    error=""
+
+    if request.method == 'POST':
+        name = request.POST('name')
+        pwd = request.POST('pwd')
+
+
+        user = authenticate(username=name, password=pwd)
+        if user:
+            login(request, user)
+            error = "no"
+        else:
+            error = "yes"
+
     return render(request, 'login.html')
 
 
